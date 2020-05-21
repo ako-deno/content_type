@@ -7,7 +7,7 @@ Create and parse HTTP Content-Type header according to RFC 7231 for Deno, compat
 
 ## API
 ```js
-import { format, parse, ContentType }  from "https://raw.githubusercontent.com/ako-deno/content_type/master/mod.ts";
+import { format, parse, ContentType, Parameters }  from "https://raw.githubusercontent.com/ako-deno/content_type/master/mod.ts";
 ```
 
 ### parse(str: string): ContentType
@@ -46,6 +46,17 @@ shown that produce the string `'image/svg+xml; charset=utf-8'`):
    parameter will be lower-cased). Example: `{charset: 'utf-8'}`
 
 Throws a `TypeError` if the object contains an invalid type or parameter names.
+
+### ContentType && Parameters
+
+```js
+type Parameters = { [key: string]: string };
+
+interface ContentType {
+  type: string;
+  parameters?: Parameters;
+}
+```
 
 # License
 
