@@ -7,7 +7,7 @@ Create and parse HTTP Content-Type header according to RFC 7231 for Deno, compat
 
 ## API
 ```js
-import { format, parse, ContentType, Parameters }  from "https://raw.githubusercontent.com/ako-deno/content_type/master/mod.ts";
+import { format, parse, ContentType, Parameters }  from "https://deno.land/x/content_type/mod.ts";
 ```
 
 ### parse(str: string): ContentType
