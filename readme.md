@@ -13,7 +13,7 @@ import { format, parse, ContentType, Parameters }  from "https://deno.land/x/con
 ### parse(str: string): ContentType
 
 ```js
-let obj = contentType.parse('image/svg+xml; charset=utf-8');
+let obj = parse('image/svg+xml; charset=utf-8');
 ```
 
 Parse a `Content-Type` header. This will return an object with the following
@@ -30,7 +30,7 @@ Throws a `TypeError` if the string is missing or invalid.
 ### format(obj: ContentType): string
 
 ```js
-let str = contentType.format({
+let str = format({
   type: 'image/svg+xml',
   parameters: { charset: 'utf-8' }
 });
