@@ -2,6 +2,7 @@
 
 [![tag](https://img.shields.io/github/tag/ako-deno/content_type.svg)](https://github.com/ako-deno/content_type/tags)
 ![content_type-ci](https://github.com/ako-deno/content_type/workflows/content_type-ci/badge.svg)
+[![HitCount](http://hits.dwyl.com/ako-deno/content_type.svg)](http://hits.dwyl.com/ako-deno/content_type)
 
 Create and parse HTTP Content-Type header according to RFC 7231 for Deno, compatible with Browser. Based on `https://github.com/jshttp/content-type`.
 
