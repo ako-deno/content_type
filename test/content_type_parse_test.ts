@@ -1,8 +1,8 @@
 import {
-  assertStrictEq,
   assertEquals,
+  assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "./deps.ts";
 import { parse } from "../mod.ts";
 
 const { test } = Deno;
@@ -23,22 +23,22 @@ const invalidTypes = [
 
 test("parse(string) should parse basic type", () => {
   const type = parse("text/html");
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
 });
 
 test("parse(string) should parse with suffix", () => {
   const type = parse("image/svg+xml");
-  assertStrictEq(type.type, "image/svg+xml");
+  assertStrictEquals(type.type, "image/svg+xml");
 });
 
 test("parse(string) should parse basic type with surrounding OWS", () => {
   const type = parse(" text/html ");
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
 });
 
 test("parse(string) should parse parameters", () => {
   const type = parse("text/html; charset=utf-8; foo=bar");
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     charset: "utf-8",
     foo: "bar",
@@ -47,7 +47,7 @@ test("parse(string) should parse parameters", () => {
 
 test("parse(string) should parse parameters with extra LWS", () => {
   const type = parse("text/html ; charset=utf-8 ; foo=bar");
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     charset: "utf-8",
     foo: "bar",
@@ -56,12 +56,12 @@ test("parse(string) should parse parameters with extra LWS", () => {
 
 test("parse(string) should lower-case type", () => {
   const type = parse("IMAGE/SVG+XML");
-  assertStrictEq(type.type, "image/svg+xml");
+  assertStrictEquals(type.type, "image/svg+xml");
 });
 
 test("parse(string) should lower-case parameter names", () => {
   const type = parse("text/html; Charset=UTF-8");
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     charset: "UTF-8",
   });
@@ -69,7 +69,7 @@ test("parse(string) should lower-case parameter names", () => {
 
 test("parse(string) should unquote parameter values", () => {
   const type = parse('text/html; charset="UTF-8"');
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     charset: "UTF-8",
   });
@@ -77,7 +77,7 @@ test("parse(string) should unquote parameter values", () => {
 
 test("parse(string) should unquote parameter values with escapes", () => {
   const type = parse('text/html; charset = "UT\\F-\\\\\\"8\\""');
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     charset: 'UTF-\\"8"',
   });
@@ -87,7 +87,7 @@ test("parse(string) should handle balanced quotes", () => {
   const type = parse(
     'text/html; param="charset=\\"utf-8\\"; foo=bar"; bar=foo',
   );
-  assertStrictEq(type.type, "text/html");
+  assertStrictEquals(type.type, "text/html");
   assertEquals(type.parameters, {
     param: 'charset="utf-8"; foo=bar',
     bar: "foo",

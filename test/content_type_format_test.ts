@@ -1,19 +1,19 @@
 import {
-  assertStrictEq,
+  assertStrictEquals,
   assertThrows,
-} from "https://deno.land/std/testing/asserts.ts";
+} from "./deps.ts";
 import { format } from "../mod.ts";
 
 const { test } = Deno;
 
 test("format(obj) should format basic type", () => {
   const str = format({ type: "text/html" });
-  assertStrictEq(str, "text/html");
+  assertStrictEquals(str, "text/html");
 });
 
 test("format(obj) should format type with suffix", () => {
   const str = format({ type: "image/svg+xml" });
-  assertStrictEq(str, "image/svg+xml");
+  assertStrictEquals(str, "image/svg+xml");
 });
 
 test("format(obj) should format type with parameter", () => {
@@ -21,7 +21,7 @@ test("format(obj) should format type with parameter", () => {
     type: "text/html",
     parameters: { charset: "utf-8" },
   });
-  assertStrictEq(str, "text/html; charset=utf-8");
+  assertStrictEquals(str, "text/html; charset=utf-8");
 });
 
 test("format(obj) should format type with parameter that needs quotes", () => {
@@ -29,7 +29,7 @@ test("format(obj) should format type with parameter that needs quotes", () => {
     type: "text/html",
     parameters: { foo: 'bar or "baz"' },
   });
-  assertStrictEq(str, 'text/html; foo="bar or \\"baz\\""');
+  assertStrictEquals(str, 'text/html; foo="bar or \\"baz\\""');
 });
 
 test("format(obj) should format type with parameter with empty value", () => {
@@ -37,7 +37,7 @@ test("format(obj) should format type with parameter with empty value", () => {
     type: "text/html",
     parameters: { foo: "" },
   });
-  assertStrictEq(str, 'text/html; foo=""');
+  assertStrictEquals(str, 'text/html; foo=""');
 });
 
 test("format(obj) should format type with multiple parameters", () => {
@@ -45,7 +45,7 @@ test("format(obj) should format type with multiple parameters", () => {
     type: "text/html",
     parameters: { charset: "utf-8", foo: "bar", bar: "baz" },
   });
-  assertStrictEq(str, "text/html; bar=baz; charset=utf-8; foo=bar");
+  assertStrictEquals(str, "text/html; bar=baz; charset=utf-8; foo=bar");
 });
 
 test("format(obj) should reject invalid type", () => {
